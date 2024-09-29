@@ -1,0 +1,41 @@
+# Python virtual environment
+venv/
+fresh_env/
+__pycache__/
+
+# Development and local files
+*.pyc
+*.pyo
+*.pyd
+.Python
+.env
+.vscode/
+.idea/
+
+# Git related
+.git/
+.gitignore
+
+# Logs
+*.log
+
+# OS generated files
+.DS_Store
+Thumbs.db
+
+# Large media files (if any)
+*.jpg
+*.jpeg
+*.png
+*.gif
+*.mp4
+
+# Temporary files
+*.swp
+*.bak
+*.tmp
+
+# Elastic Beanstalk Files
+.elasticbeanstalk/*
+!.elasticbeanstalk/*.cfg.yml
+!.elasticbeanstalk/*.global.yml
