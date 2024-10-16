@@ -1,1 +1,13 @@
 *.dylib filter=lfs diff=lfs merge=lfs -text
+fresh_env/lib/python3.11/site-packages/clang/native/libclang.dylib filter=lfs diff=lfs merge=lfs -text
+fresh_env/lib/python3.11/site-packages/tensorflow/libtensorflow_cc.2.dylib filter=lfs diff=lfs merge=lfs -text
+fresh_env/lib/python3.11/site-packages/tensorflow/include/external/icu/icu4c/source/common/unicode/ures.h filter=lfs diff=lfs merge=lfs -text
+fresh_env/lib/python3.11/site-packages/h5py/tests/test_filters.py filter=lfs diff=lfs merge=lfs -text
+fresh_env/lib/python3.11/site-packages/tensorflow/include/tensorflow/tsl/util/determinism.h filter=lfs diff=lfs merge=lfs -text
+fresh_env/lib/python3.11/site-packages/tensorflow/include/tensorflow/compiler/xla/service/cpu/runtime_custom_call_status.h filter=lfs diff=lfs merge=lfs -text
+fresh_env/lib/python3.11/site-packages/six-1.16.0.dist-info/top_level.txt filter=lfs diff=lfs merge=lfs -text
+fresh_env/lib/python3.11/site-packages/setuptools/glob.py filter=lfs diff=lfs merge=lfs -text
+fresh_env/lib/python3.11/site-packages/tensorflow/core/framework/full_type_pb2.py filter=lfs diff=lfs merge=lfs -text
+fresh_env/lib/python3.11/site-packages/tensorflow/include/external/llvm-project/mlir/_virtual_includes/LoopLikeInterfaceIncGen/mlir/Interfaces/LoopLikeInterface.h.inc filter=lfs diff=lfs merge=lfs -text
+fresh_env/lib/python3.11/site-packages/tensorflow/include/tensorflow/core/framework/resource_mgr.h filter=lfs diff=lfs merge=lfs -text
+fresh_env/lib/python3.11/site-packages/gunicorn/workers/geventlet.py filter=lfs diff=lfs merge=lfs -text
