@@ -1,0 +1,23 @@
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+.bg-image {
+    background-color: #282c34; /* Use a dark background color */
+    background-size: cover;
+    background-position: center;
+}
+
+.loading {
+    display: none;
+}
+
+.loading img {
+    width: 50px;
+}
+
+.result img {
+    max-width: 100%;
+}

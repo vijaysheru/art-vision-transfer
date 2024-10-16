@@ -3,119 +3,36 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Artistic Style Transfer</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            background-color: #f0f0f0;
-            margin: 0;
-            padding: 0;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            min-height: 100vh;
-        }
-        .container {
-            background-color: white;
-            border-radius: 10px;
-            box-shadow: 0 0 10px rgba(0,0,0,0.1);
-            padding: 2rem;
-            width: 90%;
-            max-width: 600px;
-        }
-        h1 {
-            color: #333;
-            text-align: center;
-            margin-bottom: 2rem;
-        }
-        form {
-            display: flex;
-            flex-direction: column;
-        }
-        label {
-            margin-bottom: 0.5rem;
-            color: #666;
-        }
-        input[type="file"] {
-            margin-bottom: 1rem;
-            padding: 0.5rem;
-            border: 1px solid #ddd;
-            border-radius: 4px;
-        }
-        button {
-            background-color: #4CAF50;
-            color: white;
-            padding: 0.75rem;
-            border: none;
-            border-radius: 4px;
-            cursor: pointer;
-            font-size: 1rem;
-            transition: background-color 0.3s;
-        }
-        button:hover {
-            background-color: #45a049;
-        }
-        #loading {
-            text-align: center;
-            margin-top: 1rem;
-            display: none;
-        }
-        #result {
-            max-width: 100%;
-            height: auto;
-            margin-top: 1rem;
-            display: none;
-            border-radius: 4px;
-            box-shadow: 0 0 5px rgba(0,0,0,0.2);
-        }
-    </style>
+    <title>Artistic Vision Transfer</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+    <link rel="icon" href="{{ url_for('static', filename='images/favicon.ico') }}" type="image/x-icon">
 </head>
 <body>
-    <div class="container">
-        <h1>Artistic Style Transfer</h1>
-        <form id="uploadForm">
-            <label for="contentImage">Content Image:</label>
-            <input type="file" id="contentImage" name="content" accept="image/*" required>
+    <div class="bg-image text-center text-white d-flex align-items-center justify-content-center vh-100">
+        <div class="container">
+            <h1 class="display-4">Artistic Vision Transfer</h1>
+            <p class="lead">Transform your photos into stunning artworks!</p>
 
-            <label for="styleImage">Style Image:</label>
-            <input type="file" id="styleImage" name="style" accept="image/*" required>
+            <form id="upload-form" action="/style-transfer" method="post" enctype="multipart/form-data" class="mt-4">
+                <div class="form-group">
+                    <input type="file" name="content_image" class="form-control-file" required>
+                </div>
+                <div class="form-group">
+                    <input type="file" name="style_image" class="form-control-file" required>
+                </div>
+                <button type="submit" class="btn btn-primary btn-lg">Transform</button>
+            </form>
 
-            <button type="submit">Transfer Style</button>
-        </form>
-        <div id="loading">Processing... Please wait.</div>
-        <img id="result" alt="Stylized Image">
+            <div id="loading" class="loading mt-3">
+                <img src="{{ url_for('static', filename='images/loading.gif') }}" alt="Loading...">
+                <p>Applying artistic magic...</p>
+            </div>
+
+            <div id="result" class="result mt-3"></div>
+        </div>
     </div>
 
-    <script>
-        document.getElementById('uploadForm').addEventListener('submit', async (e) => {
-            e.preventDefault();
-            const formData = new FormData(e.target);
-            const loading = document.getElementById('loading');
-            const result = document.getElementById('result');
-
-            loading.style.display = 'block';
-            result.style.display = 'none';
-
-            try {
-                const response = await fetch('/style-transfer', {
-                    method: 'POST',
-                    body: formData
-                });
-
-                if (!response.ok) {
-                    throw new Error('Style transfer failed');
-                }
-
-                const blob = await response.blob();
-                const imgUrl = URL.createObjectURL(blob);
-                result.src = imgUrl;
-                result.style.display = 'block';
-            } catch (error) {
-                alert('An error occurred: ' + error.message);
-            } finally {
-                loading.style.display = 'none';
-            }
-        });
-    </script>
+    <script src="{{ url_for('static', filename='js/script.js') }}"></script>
 </body>
 </html>

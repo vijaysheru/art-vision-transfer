@@ -1,10 +1,8 @@
 import tensorflow as tf
 import numpy as np
 
-
 # Load and preprocess images
-def load_img(path_to_img):
-    max_dim = 512
+def load_img(path_to_img, max_dim=256):  # Added max_dim parameter for flexibility
     img = tf.io.read_file(path_to_img)
     img = tf.image.decode_image(img, channels=3)
     img = tf.image.convert_image_dtype(img, tf.float32)
@@ -18,17 +16,14 @@ def load_img(path_to_img):
     img = img[tf.newaxis, :]
     return img
 
-
 # Content loss function
 def content_loss(base_content, target):
     return tf.reduce_mean(tf.square(base_content - target))
-
 
 # Style loss function
 def style_loss(base_style, gram_target):
     gram_style = gram_matrix(base_style)
     return tf.reduce_mean(tf.square(gram_style - gram_target))
-
 
 # Gram matrix calculation
 def gram_matrix(input_tensor):
@@ -36,7 +31,6 @@ def gram_matrix(input_tensor):
     input_shape = tf.shape(input_tensor)
     num_locations = tf.cast(input_shape[1] * input_shape[2], tf.float32)
     return result / num_locations
-
 
 # VGG19 model for feature extraction
 def vgg_layers(layer_names):
@@ -46,9 +40,8 @@ def vgg_layers(layer_names):
     model = tf.keras.Model([vgg.input], outputs)
     return model
 
-
 # Style transfer function
-def style_transfer(content_path, style_path, num_iterations=1000):
+def style_transfer(content_path, style_path, num_iterations=100):  # Reduced iterations
     content_image = load_img(content_path)
     style_image = load_img(style_path)
 
@@ -59,7 +52,6 @@ def style_transfer(content_path, style_path, num_iterations=1000):
 
     style_features = vgg(style_image)
     content_features = vgg(content_image)
-
 
     style_weight = 1e-2
     content_weight = 1e4
@@ -97,13 +89,7 @@ def style_transfer(content_path, style_path, num_iterations=1000):
 
     for i in range(num_iterations):
         train_step(image)
-        if i % 100 == 0:
+        if i % 10 == 0:  # Reduced logging frequency
             print(f"Iteration {i}")
 
     return image.numpy()
-
-
-# Usage
-#content_path = 'path_to_content_image.jpg'
-#style_path = 'path_to_style_image.jpg'
-#stylized_image = style_transfer(content_path, style_path)
