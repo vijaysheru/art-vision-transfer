@@ -1,4 +1,4 @@
-# models/nlp_interface.py
+
 from transformers import AutoTokenizer, AutoModelForQuestionAnswering
 import torch
 
@@ -16,5 +16,3 @@ def process_user_query(query, context):
         tokenizer.convert_ids_to_tokens(inputs["input_ids"][0][answer_start:answer_end]))
 
     return answer
-
-# Add more NLP functions as needed
